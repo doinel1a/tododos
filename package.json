@@ -1,0 +1,72 @@
+{
+  "private": true,
+  "author": {
+    "name": "Doinel Atanasiu",
+    "email": "doinel1atanasiu@gmail.com",
+    "url": "https://business-link.d1a.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doinel1a/next-ts-starter"
+  },
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "npx husky install && npx playwright install",
+    "clean:dist": "npx rimraf dist",
+    "clean:report": "npx rimraf playwright-report",
+    "clean:deps": "npx rimraf high-level-dependencies.html",
+    "deps": "depcruise --version && depcruise --config .dependency-cruiser.cjs --output-type archi src | dot -T svg | depcruise-wrap-stream-in-html > high-level-dependencies.html",
+    "test:chrome": "npx playwright test --headed --project=chromium",
+    "test:firefox": "npx playwright test --headed --project=firefox",
+    "test:safari": "npx playwright test --headed --project=webkit",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "next start"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "next": "13.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@builder.io/partytown": "^0.7.5",
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@playwright/test": "^1.32.3",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.35",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.0",
+    "dependency-cruiser": "^12.11.1",
+    "eslint": "^8.38.0",
+    "eslint-config-next": "^13.3.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-sonarjs": "^0.19.0",
+    "eslint-plugin-unicorn": "^46.0.0",
+    "husky": "^8.0.3",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.6",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "sass": "^1.62.0",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.0.4"
+  }
+}
