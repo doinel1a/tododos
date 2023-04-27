@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Counter from '@/components/counter';
-import GithubCorner from '@/components/github-corner';
+import AddList from '@/components/list/add-list';
 import MetaHead from '@/components/meta-head';
 
 export default function Home() {
@@ -13,12 +12,8 @@ export default function Home() {
         keywords='typescript, ts, react-typescript, react-ts, react, template, boilerplate, next-js, nextjs, vercel, tailwind, tailwindcss, sass, scss, css, github'
       />
 
-      <main className='flex h-screen flex-col items-center justify-center bg-primary text-color'>
-        <GithubCorner
-          title='Get started on GitHub'
-          url='https://github.com/doinel1a/next-ts-starter'
-        />
-        <Counter />
+      <main className='m-2 h-full w-full max-w-xl rounded-lg  bg-secondary p-2 md:m-4 md:p-4'>
+        <AddList />
       </main>
     </>
   );

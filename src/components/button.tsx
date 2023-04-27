@@ -1,18 +1,57 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 interface IButton {
-  text: string;
+  type: 'text' | 'icon';
+  title: string;
+  text?: string;
+  icon?: IconProp;
+  buttonCSS: string;
+  iconCSS?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function Button({ text, onClick }: IButton) {
-  return (
-    <button
-      type='button'
-      className='w-16 rounded-xl bg-accent-primary px-4 py-2 text-xl transition-colors hover:bg-accent-primary-state focus:bg-accent-primary-state'
-      onClick={onClick}
-    >
-      <span>{text}</span>
-    </button>
-  );
+export default function Button({
+  type,
+  title,
+  text,
+  icon,
+  buttonCSS,
+  iconCSS,
+  onClick
+}: IButton) {
+  switch (type) {
+    case 'text': {
+      return (
+        <button
+          type='button'
+          title={title}
+          className={`rounded-lg transition-colors ${buttonCSS}`}
+          onClick={onClick}
+        >
+          {text}
+        </button>
+      );
+    }
+    case 'icon': {
+      return (
+        <button
+          type='button'
+          title={title}
+          className={`transition-colors ${buttonCSS}`}
+          onClick={onClick}
+        >
+          {icon ? (
+            <FontAwesomeIcon
+              icon={icon}
+              className={`transition-colors ${iconCSS}`}
+            />
+          ) : (
+            <></>
+          )}
+        </button>
+      );
+    }
+  }
 }

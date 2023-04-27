@@ -36,7 +36,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
-    "ua-parser-js": "^1.0.35"
+    "ua-parser-js": "^1.0.35",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@builder.io/partytown": "^0.8.0",
@@ -47,6 +48,7 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
     "@types/ua-parser-js": "^0.7.36",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "autoprefixer": "^10.4.14",
@@ -74,4 +76,3 @@
     "typescript": "^5.0.4"
   }
 }
-
