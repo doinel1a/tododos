@@ -5,6 +5,9 @@ import '@/scss/globals.scss';
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
 import React from 'react';
+import { Provider } from 'react-redux';
+
+import store from '@/store/store';
 
 const roboto = Roboto({
   weight: ['400', '500', '700', '900'],
@@ -26,7 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
 
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }
