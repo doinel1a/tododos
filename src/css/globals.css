@@ -23,7 +23,7 @@ body,
 }
 
 body {
-  @apply text-color-primary bg-primary;
+  @apply bg-primary text-color-primary;
 }
 
 #__next {

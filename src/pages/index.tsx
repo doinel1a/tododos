@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AddList from '@/components/list/add-list';
+import Lists from '@/components/list/lists';
 import MetaHead from '@/components/meta-head';
 
 export default function Home() {
-  return (
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient ? (
     <>
       <MetaHead
         title='NextTS — Starter'
@@ -12,9 +19,12 @@ export default function Home() {
         keywords='typescript, ts, react-typescript, react-ts, react, template, boilerplate, next-js, nextjs, vercel, tailwind, tailwindcss, sass, scss, css, github'
       />
 
-      <main className='m-2 h-full w-full max-w-xl rounded-lg  bg-secondary p-2 md:m-4 md:p-4'>
+      <main className='flex max-h-full w-full max-w-xl flex-col justify-center overflow-hidden rounded-lg bg-secondary p-2 md:p-4'>
         <AddList />
+        <Lists />
       </main>
     </>
+  ) : (
+    <></>
   );
 }

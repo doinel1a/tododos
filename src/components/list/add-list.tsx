@@ -33,7 +33,7 @@ export default function AddList() {
   return (
     <Form
       CSS={`border border-tertiary ${
-        lists?.length > 0 ? ' rounded-t-lg' : 'rounded-lg'
+        lists?.length > 0 ? 'rounded-t-lg' : 'rounded-lg'
       }`}
       onSubmit={(event) => addList(event)}
     >
