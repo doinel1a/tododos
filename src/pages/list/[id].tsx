@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
+import Layout from '@/components/layout/layout';
 import AddTask from '@/components/task/add-task';
 import TasksList from '@/components/task/tasks-list';
 import useLists from '@/hooks/use-lists';
@@ -29,7 +30,7 @@ export default function TodoList() {
   return taskList === undefined ? (
     <div>Loading . . .</div>
   ) : (
-    <main className='flex max-h-full w-full max-w-xl flex-col justify-center overflow-hidden rounded-lg bg-secondary p-2 md:p-4'>
+    <Layout>
       <nav className='relative mb-4 flex w-full items-center justify-start '>
         <Link href='/' title='Back' className='absolute'>
           <FontAwesomeIcon
@@ -44,6 +45,6 @@ export default function TodoList() {
 
       <AddTask list={taskList} />
       <TasksList list={taskList} />
-    </main>
+    </Layout>
   );
 }
