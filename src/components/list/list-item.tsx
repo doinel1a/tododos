@@ -29,7 +29,9 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
       document.body.addEventListener('click', handleOutsideClicks);
     else document.body.removeEventListener('click', handleOutsideClicks);
 
-    () => document.body.removeEventListener('click', handleOutsideClicks);
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClicks);
+    };
   }, [isEditMode]);
 
   function handleOutsideClicks(event: MouseEvent) {

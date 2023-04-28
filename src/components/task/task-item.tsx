@@ -35,7 +35,9 @@ export default function TaskItem({
       document.body.addEventListener('click', handleOutsideClicks);
     else document.body.removeEventListener('click', handleOutsideClicks);
 
-    () => document.body.removeEventListener('click', handleOutsideClicks);
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClicks);
+    };
   }, [isEditMode]);
 
   function handleOutsideClicks(event: MouseEvent) {
