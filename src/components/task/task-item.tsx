@@ -69,7 +69,6 @@ export default function TaskItem({
             CSS='flex items-center border border-transparent'
           >
             <Input
-              id='edit'
               value={updatedTask}
               shouldAutofocus={true}
               shouldClear={false}

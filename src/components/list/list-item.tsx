@@ -65,7 +65,6 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
             CSS='flex items-center border border-transparent'
           >
             <Input
-              id='edit'
               value={updatedName}
               shouldAutofocus={true}
               shouldClear={false}

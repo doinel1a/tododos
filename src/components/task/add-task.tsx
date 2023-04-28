@@ -42,7 +42,6 @@ export default function AddTask({ list }: IAddTask) {
 
   return (
     <Form
-      id='add'
       CSS={`border border-tertiary ${
         list.tasks.length > 0 ? ' rounded-t-lg' : 'rounded-lg'
       }`}
