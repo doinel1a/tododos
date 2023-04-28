@@ -35,7 +35,7 @@ export default function TodoList() {
         <Link href='/' title='Back' className='absolute'>
           <FontAwesomeIcon
             icon={faChevronLeft}
-            className='text-lg text-color-primary transition-colors hover:text-color-secondary'
+            className='h-5 w-5 text-lg text-color-primary transition-colors hover:text-color-secondary'
           />
         </Link>
         <h2 className='w-full text-center text-2xl font-bold'>

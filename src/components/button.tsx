@@ -45,7 +45,7 @@ export default function Button({
           {icon ? (
             <FontAwesomeIcon
               icon={icon}
-              className={`transition-colors ${iconCSS}`}
+              className={`h-4 w-4 transition-colors ${iconCSS}`}
             />
           ) : (
             <></>

@@ -41,7 +41,7 @@ export default function Input({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`placeholder-color-secondary w-full bg-transparent focus:border-none focus:outline-none ${CSS}`}
+        className={`w-full bg-transparent placeholder-color-secondary focus:border-none focus:outline-none ${CSS}`}
       />
       {shouldClear ? (
         value.length > 2 ? (

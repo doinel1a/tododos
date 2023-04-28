@@ -77,7 +77,7 @@ export default function TaskItem({
             />
             <FontAwesomeIcon
               icon={faSquarePen}
-              className='absolute right-2 text-color-secondary'
+              className='absolute right-2 h-4 w-4 text-color-secondary'
             />
           </Form>
           <div className='mt-2 flex w-full cursor-default  flex-col justify-between text-xs text-color-secondary md:flex-row'>
