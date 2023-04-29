@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
+import { createQueryFromCategoryName } from '@/utils/url';
+
 import useUserAgent from '../../hooks/use-user-agent';
 import { ICategory } from '../../types/category';
 import Button from '../button';
@@ -95,7 +97,7 @@ export default function CategoriesListItem({
         </div>
       ) : (
         <Link
-          href={`/category/${category.name.toLowerCase().replaceAll(' ', '-')}`}
+          href={`/category/${createQueryFromCategoryName(category.name)}`}
           title={`Go to '${category.name}' tasks`}
           className='relative flex flex-col'
         >

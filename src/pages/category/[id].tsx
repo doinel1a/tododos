@@ -11,6 +11,7 @@ import TasksList from '@/components/tasks/list';
 import useCategoriesList from '@/hooks/use-categories-list';
 import { ICategory } from '@/types/category';
 import { createDeepCopy } from '@/utils/json';
+import { createQueryFromCategoryName } from '@/utils/url';
 
 export default function TasksListPage() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function TasksListPage() {
     const { id } = router.query;
 
     const taskList = categoriesList.find(
-      (list) => list.name.toLowerCase().replaceAll(' ', '-') === id
+      (list) => createQueryFromCategoryName(list.name) === id
     );
 
     setTaskList(taskList);
