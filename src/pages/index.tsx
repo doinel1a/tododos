@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import CategoriesList from '@/components/categories/list';
 import AddForm from '@/components/form/add-form';
 import Layout from '@/components/layout/layout';
-import Lists from '@/components/list/lists';
-import useLists from '@/hooks/use-lists';
+import useCategoriesList from '@/hooks/use-categories-list';
 
 export default function Home() {
-  const { lists, setLists } = useLists();
+  const { categoriesList, setCategoriesList } = useCategoriesList();
 
   const [isClient, setIsClient] = useState(false);
   const [categoryName, setCategoryName] = useState('');
@@ -20,7 +20,7 @@ export default function Home() {
     event.preventDefault();
 
     if (categoryName.trim() !== '') {
-      setLists([
+      setCategoriesList([
         {
           id: uuid(),
           name: categoryName,
@@ -28,7 +28,7 @@ export default function Home() {
           createdAt: new Date().toLocaleString(),
           updatedAt: ''
         },
-        ...lists
+        ...categoriesList
       ]);
 
       setCategoryName('');
@@ -39,12 +39,12 @@ export default function Home() {
     <Layout>
       <AddForm
         inputValue={categoryName}
-        categoryListLength={lists.length}
+        categoriesListLength={categoriesList.length}
         onInputChange={(event) => setCategoryName(event.target.value)}
         onInputClear={() => setCategoryName('')}
         onFormSubmit={addCategory}
       />
-      <Lists />
+      <CategoriesList />
     </Layout>
   ) : (
     <></>

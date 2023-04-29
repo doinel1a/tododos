@@ -1,6 +1,6 @@
 import { ITask } from './task';
 
-export interface IList {
+export interface ICategory {
   id: string;
   name: string;
   tasks: ITask[];

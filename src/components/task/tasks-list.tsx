@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
 import useTasksCount from '@/hooks/use-tasks-count';
-import { IList } from '@/types/list';
+import { ICategory } from '@/types/category';
 
-import useLists from '../../hooks/use-lists';
+import useCategoriesList from '../../hooks/use-categories-list';
 import { createDeepCopy } from '../../utils/json';
 import ListFooter from './list-footer';
 import TaskItem from './task-item';
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 interface ITaskList {
-  list: IList;
+  list: ICategory;
 }
 
 const roundedLG = 'rounded-lg';
 const roundedTopLG = 'rounded-t-lg';
 
 export default function TasksList({ list }: ITaskList) {
-  const { lists, setLists } = useLists();
+  const { categoriesList, setCategoriesList } = useCategoriesList();
   const { totalTasks, activeTasks, completedTasks } = useTasksCount(list.tasks);
 
   const [activeFilter, setActiveFilter] = useState('All');
@@ -32,13 +32,13 @@ export default function TasksList({ list }: ITaskList) {
 
   const onChecked = (taskId: string) => {
     const now = new Date().toLocaleString();
-    const temporaryLists = createDeepCopy(lists);
+    const temporaryCategoriesList = createDeepCopy(categoriesList);
 
-    for (const temporaryList of temporaryLists) {
-      if (temporaryList.id === list.id) {
-        temporaryList.updatedAt = now;
+    for (const category of temporaryCategoriesList) {
+      if (category.id === list.id) {
+        category.updatedAt = now;
 
-        for (const temporaryTask of temporaryList.tasks) {
+        for (const temporaryTask of category.tasks) {
           if (temporaryTask.id === taskId) {
             temporaryTask.isDone = !temporaryTask.isDone;
             temporaryTask.completedAt = temporaryTask.isDone ? now : '';
@@ -47,18 +47,18 @@ export default function TasksList({ list }: ITaskList) {
       }
     }
 
-    setLists(temporaryLists);
+    setCategoriesList(temporaryCategoriesList);
   };
 
   const onUpdate = (taskId: string, updatedTask: string) => {
     const now = new Date().toLocaleString();
-    const temporaryLists = createDeepCopy(lists);
+    const temporaryCategoriesList = createDeepCopy(categoriesList);
 
-    for (const temporaryList of temporaryLists) {
-      if (temporaryList.id === list.id) {
-        temporaryList.updatedAt = now;
+    for (const category of temporaryCategoriesList) {
+      if (category.id === list.id) {
+        category.updatedAt = now;
 
-        for (const temporaryTask of temporaryList.tasks) {
+        for (const temporaryTask of category.tasks) {
           if (temporaryTask.id === taskId) {
             temporaryTask.task = updatedTask;
           }
@@ -66,41 +66,37 @@ export default function TasksList({ list }: ITaskList) {
       }
     }
 
-    setLists(temporaryLists);
+    setCategoriesList(temporaryCategoriesList);
   };
 
   const onDelete = (taskId: string) => {
     const now = new Date().toLocaleString();
-    const temporaryLists = createDeepCopy(lists);
+    const temporaryCategoriesList = createDeepCopy(categoriesList);
 
-    for (const temporaryList of temporaryLists) {
-      if (temporaryList.id === list.id) {
-        temporaryList.updatedAt = now;
+    for (const category of temporaryCategoriesList) {
+      if (category.id === list.id) {
+        category.updatedAt = now;
 
-        temporaryList.tasks = temporaryList.tasks.filter(
-          (temporaryTodo) => temporaryTodo.id !== taskId
-        );
+        category.tasks = category.tasks.filter((task) => task.id !== taskId);
       }
     }
 
-    setLists(temporaryLists);
+    setCategoriesList(temporaryCategoriesList);
   };
 
   const onClearCompleted = () => {
     const now = new Date().toLocaleString();
-    const temporaryLists = createDeepCopy(lists);
+    const temporaryCategoriesList = createDeepCopy(categoriesList);
 
-    for (const temporaryList of temporaryLists) {
-      if (temporaryList.id === list.id) {
-        temporaryList.updatedAt = now;
+    for (const category of temporaryCategoriesList) {
+      if (category.id === list.id) {
+        category.updatedAt = now;
 
-        temporaryList.tasks = temporaryList.tasks.filter(
-          (temporaryTodo) => !temporaryTodo.isDone
-        );
+        category.tasks = category.tasks.filter((task) => !task.isDone);
       }
     }
 
-    setLists(temporaryLists);
+    setCategoriesList(temporaryCategoriesList);
   };
 
   const onFilter = (filter: string) => {

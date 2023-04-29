@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { listsSlice } from '@/slices/lists-slice';
+import { categoriesListSlice } from '@/slices/categories-list-slice';
 
 const store = configureStore({
   reducer: {
-    lists: listsSlice.reducer
+    categoriesList: categoriesListSlice.reducer
   }
 });
 

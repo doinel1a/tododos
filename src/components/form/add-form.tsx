@@ -7,7 +7,7 @@ import Input from './input';
 
 interface IAddForm {
   inputValue: string;
-  categoryListLength: number;
+  categoriesListLength: number;
   onInputChange: React.ChangeEventHandler<HTMLInputElement>;
   onInputClear: React.MouseEventHandler<HTMLButtonElement>;
   onFormSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -15,7 +15,7 @@ interface IAddForm {
 
 export default function AddForm({
   inputValue,
-  categoryListLength,
+  categoriesListLength,
   onInputChange,
   onInputClear,
   onFormSubmit
@@ -25,7 +25,7 @@ export default function AddForm({
   return (
     <Form
       CSS={`border border-tertiary ${
-        categoryListLength > 0 ? 'rounded-t-lg' : 'rounded-lg'
+        categoriesListLength > 0 ? 'rounded-t-lg' : 'rounded-lg'
       }`}
       onSubmit={(event) => onFormSubmit(event)}
     >

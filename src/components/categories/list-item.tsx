@@ -7,27 +7,34 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 import useUserAgent from '../../hooks/use-user-agent';
-import { IList } from '../../types/list';
+import { ICategory } from '../../types/category';
 import Button from '../button';
 import Form from '../form/form';
 import Input from '../form/input';
 
-interface IListItem {
-  list: IList;
+interface ICategoriesListItem {
+  category: ICategory;
   onUpdate: (todoId: string, updatedTask: string) => void;
   onDelete: (todoId: string) => void;
 }
 
-export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
+export default function CategoriesListItem({
+  category,
+  onUpdate,
+  onDelete
+}: ICategoriesListItem) {
   const { isMobile } = useUserAgent();
+
   const [isHovered, setIsHovered] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [updatedName, setUpdatedName] = useState(list.name);
+  const [updatedName, setUpdatedName] = useState(category.name);
 
   useEffect(() => {
-    if (isEditMode)
+    if (isEditMode) {
       document.body.addEventListener('click', handleOutsideClicks);
-    else document.body.removeEventListener('click', handleOutsideClicks);
+    } else {
+      document.body.removeEventListener('click', handleOutsideClicks);
+    }
 
     return () => {
       document.body.removeEventListener('click', handleOutsideClicks);
@@ -40,12 +47,14 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
     }
   }
 
-  const updateListName = (event: React.FormEvent) => {
+  const updateCategoryName = (event: React.FormEvent) => {
     event.preventDefault();
 
-    setIsEditMode(false);
+    if (category.name !== updatedName) {
+      onUpdate(category.id, updatedName);
+    }
 
-    if (list.name !== updatedName) onUpdate(list.id, updatedName);
+    setIsEditMode(false);
   };
 
   return (
@@ -61,7 +70,7 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
       {isEditMode ? (
         <div className='relative flex flex-col px-2'>
           <Form
-            onSubmit={(event) => updateListName(event)}
+            onSubmit={(event) => updateCategoryName(event)}
             CSS='flex items-center border border-transparent'
           >
             <Input
@@ -76,22 +85,22 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
             />
           </Form>
           <div className='mt-2 flex w-full flex-col justify-between text-xs text-color-secondary md:flex-row'>
-            <span>Created: {list.createdAt}</span>
-            {list.updatedAt === '' ? (
+            <span>Created: {category.createdAt}</span>
+            {category.updatedAt === '' ? (
               <></>
             ) : (
-              <span>Updated: {list.updatedAt}</span>
+              <span>Updated: {category.updatedAt}</span>
             )}
           </div>
         </div>
       ) : (
         <Link
-          href={`/list/${list.name.toLowerCase().replaceAll(' ', '-')}`}
-          title={`Go to '${list.name}' list`}
+          href={`/category/${category.name.toLowerCase().replaceAll(' ', '-')}`}
+          title={`Go to '${category.name}' tasks`}
           className='relative flex flex-col'
         >
           <p
-            title='Update list name'
+            title='Update category name'
             className='w-fit cursor-text rounded-lg border border-transparent px-2 hover:border-accent-primary'
             onClick={(event) => {
               event.preventDefault();
@@ -101,20 +110,20 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
               setIsEditMode(true);
             }}
           >
-            {list.name}
+            {category.name}
           </p>
           <div className='mt-2 flex w-full flex-col justify-between px-2 text-xs text-color-secondary md:flex-row'>
-            <span>Created: {list.createdAt}</span>
-            {list.updatedAt === '' ? (
+            <span>Created: {category.createdAt}</span>
+            {category.updatedAt === '' ? (
               <></>
             ) : (
-              <span>Updated: {list.updatedAt}</span>
+              <span>Updated: {category.updatedAt}</span>
             )}
           </div>
           {isMobile ? (
             <Button
               type='icon'
-              title='Delete list'
+              title='Delete category'
               icon={faClose}
               buttonCSS='absolute right-2'
               iconCSS='text-red-400 hover:text-red-600'
@@ -122,13 +131,13 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
                 event.preventDefault();
                 event.stopPropagation();
 
-                onDelete(list.id);
+                onDelete(category.id);
               }}
             />
           ) : isHovered ? (
             <Button
               type='icon'
-              title='Delete list'
+              title='Delete category'
               icon={faClose}
               buttonCSS='absolute right-2'
               iconCSS='text-red-400 hover:text-red-600'
@@ -136,7 +145,7 @@ export default function ListItem({ list, onUpdate, onDelete }: IListItem) {
                 event.preventDefault();
                 event.stopPropagation();
 
-                onDelete(list.id);
+                onDelete(category.id);
               }}
             />
           ) : (

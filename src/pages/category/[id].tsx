@@ -8,36 +8,36 @@ import { v4 as uuid } from 'uuid';
 import AddForm from '@/components/form/add-form';
 import Layout from '@/components/layout/layout';
 import TasksList from '@/components/task/tasks-list';
-import useLists from '@/hooks/use-lists';
-import { IList } from '@/types/list';
+import useCategoriesList from '@/hooks/use-categories-list';
+import { ICategory } from '@/types/category';
 import { createDeepCopy } from '@/utils/json';
 
 export default function TodoList() {
   const router = useRouter();
 
-  const { lists, setLists } = useLists();
+  const { categoriesList, setCategoriesList } = useCategoriesList();
 
   const [taskName, setTaskName] = useState('');
-  const [taskList, setTaskList] = useState<IList>();
+  const [taskList, setTaskList] = useState<ICategory>();
 
   useEffect(() => {
     const { id } = router.query;
 
-    const taskList = lists.find(
+    const taskList = categoriesList.find(
       (list) => list.name.toLowerCase().replaceAll(' ', '-') === id
     );
 
     setTaskList(taskList);
-  }, [router, lists]);
+  }, [router, categoriesList]);
 
   const addTask = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (taskName.trim() !== '' && taskList !== undefined) {
-      const temporaryCategoryList = createDeepCopy(lists);
+      const temporaryCategoriesList = createDeepCopy(categoriesList);
 
-      temporaryCategoryList
-        .find((temporaryList) => temporaryList.id === taskList.id)
+      temporaryCategoriesList
+        .find((category) => category.id === taskList.id)
         ?.tasks?.unshift({
           id: uuid(),
           task: taskName,
@@ -46,7 +46,7 @@ export default function TodoList() {
           isDone: false
         });
 
-      setLists(temporaryCategoryList);
+      setCategoriesList(temporaryCategoriesList);
       setTaskName('');
     }
   };
@@ -69,7 +69,7 @@ export default function TodoList() {
 
       <AddForm
         inputValue={taskName}
-        categoryListLength={taskList.tasks.length}
+        categoriesListLength={taskList.tasks.length}
         onInputChange={(event) => setTaskName(event.target.value)}
         onInputClear={() => setTaskName('')}
         onFormSubmit={addTask}
