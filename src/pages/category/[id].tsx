@@ -12,7 +12,7 @@ import useCategoriesList from '@/hooks/use-categories-list';
 import { ICategory } from '@/types/category';
 import { createDeepCopy } from '@/utils/json';
 
-export default function TodoList() {
+export default function TasksListPage() {
   const router = useRouter();
 
   const { categoriesList, setCategoriesList } = useCategoriesList();

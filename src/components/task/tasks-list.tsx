@@ -100,16 +100,16 @@ export default function TasksList({ list }: ITaskList) {
   };
 
   const onFilter = (filter: string) => {
-    const addTodoForm = document.querySelector('#add');
+    const addTaskForm = document.querySelector('#add');
 
     switch (filter) {
       case 'all': {
         if (totalTasks > 0) {
-          addTodoForm?.classList.remove(roundedLG);
-          addTodoForm?.classList.add(roundedTopLG);
+          addTaskForm?.classList.remove(roundedLG);
+          addTaskForm?.classList.add(roundedTopLG);
         } else {
-          addTodoForm?.classList.remove(roundedTopLG);
-          addTodoForm?.classList.add(roundedLG);
+          addTaskForm?.classList.remove(roundedTopLG);
+          addTaskForm?.classList.add(roundedLG);
         }
 
         setFilteredTasks(list.tasks);
@@ -118,11 +118,11 @@ export default function TasksList({ list }: ITaskList) {
       }
       case 'active': {
         if (activeTasks === 0) {
-          addTodoForm?.classList.remove(roundedTopLG);
-          addTodoForm?.classList.add(roundedLG);
+          addTaskForm?.classList.remove(roundedTopLG);
+          addTaskForm?.classList.add(roundedLG);
         } else {
-          addTodoForm?.classList.remove(roundedLG);
-          addTodoForm?.classList.add(roundedTopLG);
+          addTaskForm?.classList.remove(roundedLG);
+          addTaskForm?.classList.add(roundedTopLG);
         }
 
         setFilteredTasks(list.tasks.filter((task) => !task.isDone));
@@ -131,11 +131,11 @@ export default function TasksList({ list }: ITaskList) {
       }
       case 'completed': {
         if (completedTasks === 0) {
-          addTodoForm?.classList.remove(roundedTopLG);
-          addTodoForm?.classList.add(roundedLG);
+          addTaskForm?.classList.remove(roundedTopLG);
+          addTaskForm?.classList.add(roundedLG);
         } else {
-          addTodoForm?.classList.remove(roundedLG);
-          addTodoForm?.classList.add(roundedTopLG);
+          addTaskForm?.classList.remove(roundedLG);
+          addTaskForm?.classList.add(roundedTopLG);
         }
 
         setFilteredTasks(list.tasks.filter((task) => task.isDone));

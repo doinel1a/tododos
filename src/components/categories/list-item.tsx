@@ -14,8 +14,8 @@ import Input from '../form/input';
 
 interface ICategoriesListItem {
   category: ICategory;
-  onUpdate: (todoId: string, updatedTask: string) => void;
-  onDelete: (todoId: string) => void;
+  onUpdate: (taskId: string, updatedTask: string) => void;
+  onDelete: (taskId: string) => void;
 }
 
 export default function CategoriesListItem({
