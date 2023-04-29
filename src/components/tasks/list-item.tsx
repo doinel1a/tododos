@@ -99,18 +99,18 @@ export default function TasksListItem({
           <div className='flex'>
             <input
               type='checkbox'
-              checked={task.isDone}
+              checked={task.isCompleted}
               onChange={() => onChecked(task.id)}
             />
             <p
-              title={task.isDone ? '' : 'Click to update task'}
+              title={task.isCompleted ? '' : 'Click to update task'}
               className={`ml-1 w-fit px-2 ${
-                task.isDone
+                task.isCompleted
                   ? 'cursor-default border border-transparent text-color-secondary line-through'
                   : 'cursor-text rounded-lg border border-transparent hover:border-accent-primary'
               }`}
               onClick={(event) => {
-                if (!task.isDone) {
+                if (!task.isCompleted) {
                   event.preventDefault();
                   event.stopPropagation();
 

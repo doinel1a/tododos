@@ -43,7 +43,7 @@ export default function TasksListPage() {
           task: taskName,
           createdAt: new Date().toLocaleString(),
           completedAt: '',
-          isDone: false
+          isCompleted: false
         });
 
       setCategoriesList(temporaryCategoriesList);

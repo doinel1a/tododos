@@ -3,5 +3,5 @@ export interface ITask {
   task: string;
   createdAt: string;
   completedAt: string;
-  isDone: boolean;
+  isCompleted: boolean;
 }

@@ -9,8 +9,8 @@ export default function useTasksCount(tasks: ITask[]) {
 
   useEffect(() => {
     setTotalTasks(tasks.length);
-    setActiveTasks(tasks.filter((task) => !task.isDone).length);
-    setCompletedTasks(tasks.filter((task) => task.isDone).length);
+    setActiveTasks(tasks.filter((task) => !task.isCompleted).length);
+    setCompletedTasks(tasks.filter((task) => task.isCompleted).length);
   }, [tasks]);
 
   return {

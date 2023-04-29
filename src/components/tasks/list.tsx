@@ -40,8 +40,8 @@ export default function TasksList({ list }: ITaskList) {
 
         for (const temporaryTask of category.tasks) {
           if (temporaryTask.id === taskId) {
-            temporaryTask.isDone = !temporaryTask.isDone;
-            temporaryTask.completedAt = temporaryTask.isDone ? now : '';
+            temporaryTask.isCompleted = !temporaryTask.isCompleted;
+            temporaryTask.completedAt = temporaryTask.isCompleted ? now : '';
           }
         }
       }
@@ -92,7 +92,7 @@ export default function TasksList({ list }: ITaskList) {
       if (category.id === list.id) {
         category.updatedAt = now;
 
-        category.tasks = category.tasks.filter((task) => !task.isDone);
+        category.tasks = category.tasks.filter((task) => !task.isCompleted);
       }
     }
 
@@ -125,7 +125,7 @@ export default function TasksList({ list }: ITaskList) {
           addTaskForm?.classList.add(roundedTopLG);
         }
 
-        setFilteredTasks(list.tasks.filter((task) => !task.isDone));
+        setFilteredTasks(list.tasks.filter((task) => !task.isCompleted));
 
         break;
       }
@@ -138,7 +138,7 @@ export default function TasksList({ list }: ITaskList) {
           addTaskForm?.classList.add(roundedTopLG);
         }
 
-        setFilteredTasks(list.tasks.filter((task) => task.isDone));
+        setFilteredTasks(list.tasks.filter((task) => task.isCompleted));
 
         break;
       }
