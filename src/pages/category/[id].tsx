@@ -19,7 +19,7 @@ export default function TasksListPage() {
   const { categoriesList, setCategoriesList } = useCategoriesList();
 
   const [taskName, setTaskName] = useState('');
-  const [taskList, setTaskList] = useState<ICategory>();
+  const [category, setTaskList] = useState<ICategory>();
 
   useEffect(() => {
     const { id } = router.query;
@@ -34,11 +34,11 @@ export default function TasksListPage() {
   const addTask = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (taskName.trim() !== '' && taskList !== undefined) {
+    if (taskName.trim() !== '' && category !== undefined) {
       const temporaryCategoriesList = createDeepCopy(categoriesList);
 
       temporaryCategoriesList
-        .find((category) => category.id === taskList.id)
+        .find((temporaryCategory) => temporaryCategory.id === category.id)
         ?.tasks?.unshift({
           id: uuid(),
           task: taskName,
@@ -52,7 +52,7 @@ export default function TasksListPage() {
     }
   };
 
-  return taskList === undefined ? (
+  return category === undefined ? (
     <div>Loading . . .</div>
   ) : (
     <Layout>
@@ -64,18 +64,18 @@ export default function TasksListPage() {
           />
         </Link>
         <h2 className='w-full text-center text-2xl font-bold'>
-          {taskList.name}
+          {category.name}
         </h2>
       </nav>
 
       <AddForm
         inputValue={taskName}
-        categoriesListLength={taskList.tasks.length}
+        categoriesListLength={category.tasks.length}
         onInputChange={(event) => setTaskName(event.target.value)}
         onInputClear={() => setTaskName('')}
         onFormSubmit={addTask}
       />
-      <TasksList list={taskList} />
+      <TasksList categoryId={category.id} tasksList={category.tasks} />
     </Layout>
   );
 }

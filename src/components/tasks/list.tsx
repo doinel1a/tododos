@@ -1,47 +1,45 @@
 import React, { useEffect, useState } from 'react';
 
 import useTasksCount from '@/hooks/use-tasks-count';
-import { ICategory } from '@/types/category';
+import { ITask } from '@/types/task';
 
 import useCategoriesList from '../../hooks/use-categories-list';
 import { createDeepCopy } from '../../utils/json';
 import ListFooter from './list-footer';
 import TasksListItem from './list-item';
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 interface ITaskList {
-  list: ICategory;
+  categoryId: string;
+  tasksList: ITask[];
 }
 
 const roundedLG = 'rounded-lg';
 const roundedTopLG = 'rounded-t-lg';
 
-export default function TasksList({ list }: ITaskList) {
+export default function TasksList({ categoryId, tasksList }: ITaskList) {
   const { categoriesList, setCategoriesList } = useCategoriesList();
-  const { totalTasks, activeTasks, completedTasks } = useTasksCount(list.tasks);
+  const { totalTasks, activeTasks, completedTasks } = useTasksCount(tasksList);
 
   const [activeFilter, setActiveFilter] = useState('All');
-  const [filteredTasks, setFilteredTasks] = useState(
-    createDeepCopy(list.tasks)
-  );
+  const [filteredTasks, setFilteredTasks] = useState(createDeepCopy(tasksList));
 
   useEffect(() => {
     setActiveFilter('All');
-    setFilteredTasks(createDeepCopy(list.tasks));
-  }, [list.tasks]);
+    setFilteredTasks(createDeepCopy(tasksList));
+  }, [tasksList]);
 
   const onChecked = (taskId: string) => {
     const now = new Date().toLocaleString();
     const temporaryCategoriesList = createDeepCopy(categoriesList);
 
     for (const category of temporaryCategoriesList) {
-      if (category.id === list.id) {
+      if (category.id === categoryId) {
         category.updatedAt = now;
 
-        for (const temporaryTask of category.tasks) {
-          if (temporaryTask.id === taskId) {
-            temporaryTask.isCompleted = !temporaryTask.isCompleted;
-            temporaryTask.completedAt = temporaryTask.isCompleted ? now : '';
+        for (const task of category.tasks) {
+          if (task.id === taskId) {
+            task.isCompleted = !task.isCompleted;
+            task.completedAt = task.isCompleted ? now : '';
           }
         }
       }
@@ -55,12 +53,12 @@ export default function TasksList({ list }: ITaskList) {
     const temporaryCategoriesList = createDeepCopy(categoriesList);
 
     for (const category of temporaryCategoriesList) {
-      if (category.id === list.id) {
+      if (category.id === categoryId) {
         category.updatedAt = now;
 
-        for (const temporaryTask of category.tasks) {
-          if (temporaryTask.id === taskId) {
-            temporaryTask.task = updatedTask;
+        for (const task of category.tasks) {
+          if (task.id === taskId) {
+            task.task = updatedTask;
           }
         }
       }
@@ -74,7 +72,7 @@ export default function TasksList({ list }: ITaskList) {
     const temporaryCategoriesList = createDeepCopy(categoriesList);
 
     for (const category of temporaryCategoriesList) {
-      if (category.id === list.id) {
+      if (category.id === categoryId) {
         category.updatedAt = now;
 
         category.tasks = category.tasks.filter((task) => task.id !== taskId);
@@ -89,7 +87,7 @@ export default function TasksList({ list }: ITaskList) {
     const temporaryCategoriesList = createDeepCopy(categoriesList);
 
     for (const category of temporaryCategoriesList) {
-      if (category.id === list.id) {
+      if (category.id === categoryId) {
         category.updatedAt = now;
 
         category.tasks = category.tasks.filter((task) => !task.isCompleted);
@@ -112,7 +110,7 @@ export default function TasksList({ list }: ITaskList) {
           addTaskForm?.classList.add(roundedLG);
         }
 
-        setFilteredTasks(list.tasks);
+        setFilteredTasks(tasksList);
 
         break;
       }
@@ -125,7 +123,7 @@ export default function TasksList({ list }: ITaskList) {
           addTaskForm?.classList.add(roundedTopLG);
         }
 
-        setFilteredTasks(list.tasks.filter((task) => !task.isCompleted));
+        setFilteredTasks(tasksList.filter((task) => !task.isCompleted));
 
         break;
       }
@@ -138,7 +136,7 @@ export default function TasksList({ list }: ITaskList) {
           addTaskForm?.classList.add(roundedTopLG);
         }
 
-        setFilteredTasks(list.tasks.filter((task) => task.isCompleted));
+        setFilteredTasks(tasksList.filter((task) => task.isCompleted));
 
         break;
       }
@@ -164,7 +162,7 @@ export default function TasksList({ list }: ITaskList) {
           ))}
         </ul>
         <ListFooter
-          tasks={list.tasks}
+          tasks={tasksList}
           activeFilter={activeFilter}
           setActiveFilter={setActiveFilter}
           onFilter={onFilter}
