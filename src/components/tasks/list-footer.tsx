@@ -5,7 +5,7 @@ import { ITask } from '@/types/task';
 
 import Button from '../button';
 
-interface IListFooter {
+interface ITasksListFooter {
   tasks: ITask[];
   activeFilter: string;
   setActiveFilter: React.Dispatch<React.SetStateAction<string>>;
@@ -28,13 +28,13 @@ const filters = [
   }
 ];
 
-export default function ListFooter({
+export default function TasksListFooter({
   tasks,
   activeFilter,
   setActiveFilter,
   onFilter,
   onClearCompleted
-}: IListFooter) {
+}: ITasksListFooter) {
   const { totalTasks, activeTasks, completedTasks } = useTasksCount(tasks);
 
   if (totalTasks > 0) {

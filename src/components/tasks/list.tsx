@@ -6,7 +6,7 @@ import { ICategory } from '@/types/category';
 import useCategoriesList from '../../hooks/use-categories-list';
 import { createDeepCopy } from '../../utils/json';
 import ListFooter from './list-footer';
-import TaskItem from './task-item';
+import TasksListItem from './list-item';
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 interface ITaskList {
@@ -154,7 +154,7 @@ export default function TasksList({ list }: ITaskList) {
           }`}
         >
           {filteredTasks?.map((task) => (
-            <TaskItem
+            <TasksListItem
               key={task.id}
               task={task}
               onChecked={onChecked}

@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid';
 
 import AddForm from '@/components/form/add-form';
 import Layout from '@/components/layout/layout';
-import TasksList from '@/components/task/tasks-list';
+import TasksList from '@/components/tasks/list';
 import useCategoriesList from '@/hooks/use-categories-list';
 import { ICategory } from '@/types/category';
 import { createDeepCopy } from '@/utils/json';

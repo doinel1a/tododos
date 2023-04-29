@@ -19,7 +19,7 @@ interface ITaskItem {
   onUpdate: (taskId: string, updatedTask: string) => void;
 }
 
-export default function TaskItem({
+export default function TasksListItem({
   task,
   onChecked,
   onDelete,
@@ -31,9 +31,11 @@ export default function TaskItem({
   const [updatedTask, setUpdatedTask] = useState(task.task);
 
   useEffect(() => {
-    if (isEditMode)
+    if (isEditMode) {
       document.body.addEventListener('click', handleOutsideClicks);
-    else document.body.removeEventListener('click', handleOutsideClicks);
+    } else {
+      document.body.removeEventListener('click', handleOutsideClicks);
+    }
 
     return () => {
       document.body.removeEventListener('click', handleOutsideClicks);
@@ -41,15 +43,19 @@ export default function TaskItem({
   }, [isEditMode]);
 
   function handleOutsideClicks(event: MouseEvent) {
-    if ((event.target as Element).id !== 'edit') setIsEditMode(false);
+    if ((event.target as Element).id !== 'edit') {
+      setIsEditMode(false);
+    }
   }
 
   const updateTask = (event: React.FormEvent) => {
     event.preventDefault();
 
-    setIsEditMode(false);
+    if (task.task !== updatedTask) {
+      onUpdate(task.id, updatedTask);
+    }
 
-    if (task.task !== updatedTask) onUpdate(task.id, updatedTask);
+    setIsEditMode(false);
   };
 
   return (
