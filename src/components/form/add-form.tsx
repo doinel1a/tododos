@@ -24,12 +24,14 @@ export default function AddForm({
 
   return (
     <Form
+      id='add-form'
       CSS={`border border-tertiary ${
         categoriesListLength > 0 ? 'rounded-t-lg' : 'rounded-lg'
       }`}
       onSubmit={(event) => onFormSubmit(event)}
     >
       <Input
+        id='add-input'
         value={inputValue}
         placeholder='What needs to be handled?'
         CSS='p-3 md:p-4'

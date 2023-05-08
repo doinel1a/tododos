@@ -43,7 +43,7 @@ export default function TasksListItem({
   }, [isEditMode]);
 
   function handleOutsideClicks(event: MouseEvent) {
-    if ((event.target as Element).id !== 'edit') {
+    if ((event.target as Element).id !== 'edit-input') {
       setIsEditMode(false);
     }
   }
@@ -71,10 +71,12 @@ export default function TasksListItem({
       {isEditMode ? (
         <div className='relative flex flex-col px-2'>
           <Form
+            id='edit-form'
             onSubmit={(event) => updateTask(event)}
             CSS='flex items-center border border-transparent'
           >
             <Input
+              id='edit-input'
               value={updatedTask}
               shouldAutofocus={true}
               shouldClear={false}

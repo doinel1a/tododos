@@ -44,7 +44,7 @@ export default function CategoriesListItem({
   }, [isEditMode]);
 
   function handleOutsideClicks(event: MouseEvent) {
-    if ((event.target as Element).id !== 'edit') {
+    if ((event.target as Element).id !== 'edit-input') {
       setIsEditMode(false);
     }
   }
@@ -72,10 +72,12 @@ export default function CategoriesListItem({
       {isEditMode ? (
         <div className='relative flex flex-col px-2'>
           <Form
+            id='edit-form'
             onSubmit={(event) => updateCategoryName(event)}
             CSS='flex items-center border border-transparent'
           >
             <Input
+              id='edit-input'
               value={updatedName}
               shouldAutofocus={true}
               shouldClear={false}

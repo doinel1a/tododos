@@ -98,7 +98,7 @@ export default function TasksList({ categoryId, tasksList }: ITaskList) {
   };
 
   const onFilter = (filter: string) => {
-    const addTaskForm = document.querySelector('#add');
+    const addTaskForm = document.querySelector('#add-form');
 
     switch (filter) {
       case 'all': {

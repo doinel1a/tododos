@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Button from '../button';
 
 interface IInput {
+  id: string;
   value: string;
   placeholder?: string;
   CSS?: string;
@@ -14,6 +15,7 @@ interface IInput {
 }
 
 export default function Input({
+  id,
   value,
   placeholder,
   CSS,
@@ -33,6 +35,7 @@ export default function Input({
   return (
     <div className='flex'>
       <input
+        id={id}
         ref={inputReference}
         type='text'
         placeholder={placeholder}
