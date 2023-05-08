@@ -73,10 +73,10 @@ export default function TasksListFooter({
               type='text'
               title={filter.title}
               text={filter.type}
-              buttonCSS={`text-sm px-2 border border-transparent ${
+              buttonCSS={`text-sm px-2 border ${
                 activeFilter === filter.type
                   ? 'border-accent-primary-state'
-                  : 'hover:border-accent-primary'
+                  : 'border-transparent hover:border-accent-primary'
               }`}
               onClick={() => {
                 if (filter.type !== activeFilter) {
