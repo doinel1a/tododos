@@ -20,6 +20,7 @@ yarn.lock
 /build
 
 # various
+/prisma/migrations
 /playwright-report
 high-level-dependencies.html
 TODO.md
@@ -34,8 +35,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
+# env files
+.env
 
 # vercel
 .vercel
