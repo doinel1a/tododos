@@ -3,13 +3,15 @@
 import '@/css/globals.css';
 import '@/scss/globals.scss';
 
-import type { AppProps } from 'next/app';
+import type { AppProps, AppType } from 'next/app';
 import { Roboto } from 'next/font/google';
+import { type Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 
 import store from '@/store/store';
+import { api } from '@/utils/api';
 
 const roboto = Roboto({
   weight: ['400', '500', '700', '900'],
@@ -22,10 +24,10 @@ const roboto = Roboto({
   variable: '--roboto'
 });
 
-export default function App({
+const App: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps }
-}: AppProps) {
+}: AppProps) => {
   return (
     <>
       <style jsx global>{`
@@ -41,4 +43,6 @@ export default function App({
       </SessionProvider>
     </>
   );
-}
+};
+
+export default api.withTRPC(App);
