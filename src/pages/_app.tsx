@@ -1,9 +1,11 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable react/no-unknown-property */
 import '@/css/globals.css';
 import '@/scss/globals.scss';
 
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
+import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -20,7 +22,10 @@ const roboto = Roboto({
   variable: '--roboto'
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
+}: AppProps) {
   return (
     <>
       <style jsx global>{`
@@ -29,9 +34,11 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
 
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+      <SessionProvider session={session}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </SessionProvider>
     </>
   );
 }
