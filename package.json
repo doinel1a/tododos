@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "postinstall": "npx husky install && npx playwright install",
+    "postinstall": "npx husky install && npx playwright install && npx prisma generate",
     "clean:dist": "npx rimraf dist",
     "clean:report": "npx rimraf playwright-report",
     "clean:deps": "npx rimraf high-level-dependencies.html",
@@ -31,13 +31,17 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@next-auth/prisma-adapter": "^1.0.6",
+    "@prisma/client": "^4.13.0",
     "@reduxjs/toolkit": "^1.9.5",
     "next": "13.4.1",
+    "next-auth": "^4.22.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "ua-parser-js": "^1.0.35",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@builder.io/partytown": "^0.8.0",
@@ -71,6 +75,7 @@
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
+    "prisma": "^4.13.0",
     "sass": "^1.62.1",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4"
