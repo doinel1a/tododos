@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from '../header/header';
 import MetaHead from '../meta-head';
 
 interface ILayout {
@@ -15,6 +16,7 @@ export default function Layout({ children }: ILayout) {
         keywords='typescript, ts, react-typescript, react-ts, react, template, boilerplate, next-js, nextjs, vercel, tailwind, tailwindcss, sass, scss, css, github'
       />
 
+      <Header />
       <main className='flex max-h-full w-full max-w-xl flex-col justify-center overflow-hidden rounded-lg bg-secondary p-2 md:p-4'>
         {children}
       </main>
